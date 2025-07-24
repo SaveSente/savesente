@@ -1,4 +1,4 @@
-import bitnobApi from "../utitls/bitnobConfig.js";
+import bitnobApi from "../utils/bitnobConfig.js";
 import wallets from "../models/wallets.js";
 import user from "../models/user.js";
 
@@ -46,6 +46,7 @@ export const create_wallet = async (req, res, next) => {
       user_id:customer_id,
       name,
       bitnob_wallet_id: bitnoAddressDetails.id,
+      bitnob_address: bitnoAddressDetails.address,
       withdrawal_date: withdrawalDate,
     });
 

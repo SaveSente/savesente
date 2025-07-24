@@ -25,6 +25,10 @@ const wallets = sequelize.define('wallets', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  bitnob_address: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   withdrawal_date: {
     type: DataTypes.DATE,
     allowNull: true
