@@ -65,3 +65,33 @@ export const create_customer = async (req, res, next) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
+
+export const get_customer = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+
+    // Validate user ID
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    // Find user by ID
+    const foundUser = await user.findByPk(userId);
+    if (!foundUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.status(200).json({
+      id: foundUser.id,
+      firstName: foundUser.firstName,
+      lastName: foundUser.lastName,
+      email: foundUser.email,
+      phone: foundUser.phone,
+      countryCode: foundUser.countryCode,
+      bitnob_customer_id: foundUser.bitnob_customer_id,
+    });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
