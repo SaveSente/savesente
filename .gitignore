@@ -1,3 +1,7 @@
+#  BACK END GIT IGNORE 
+
+
+
 # Miscellaneous
 *.class
 *.lock
@@ -6,7 +10,6 @@
 *.swp
 .buildlog/
 .history
-
 
 
 # Flutter repo-specific
@@ -27,6 +30,7 @@
 /packages/flutter/coverage/
 version
 analysis_benchmark.json
+
 
 # packages file containing multi-root paths
 .packages.generated
@@ -119,3 +123,67 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 node_modules/
+
+
+
+
+
+
+#  FRONT END GIT IGNORE 
+
+
+
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+flutter_export_environment.sh
+
+# Android
+android/.gradle/
+android/local.properties
+android/app/key.jks
+*.keystore
+*.jks
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/App.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+*.xcworkspace
+*.xcuserstate
+*.lock
+DerivedData/
+
+# macOS
+macos/Flutter/ephemeral/
+macos/Pods/
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Windows
+windows/flutter/ephemeral/
+
+# Linux
+linux/flutter/ephemeral/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Misc
+*.log
+*.tmp
+
+# Coverage
+coverage/
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
