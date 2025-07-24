@@ -2,7 +2,6 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 import wallets from "./wallets.js";
 import transactions from "./transactions.js";
-import { use } from "react";
 
 const user = sequelize.define('user', {
   id: {
@@ -48,6 +47,9 @@ const user = sequelize.define('user', {
   },
 }, {
   modelName: 'user',
+  tableName: 'user',
+  timestamps: true,
+  freezeTableName: true,
 });
 
 user.hasMany(wallets, { foreignKey: 'user_id' });
@@ -55,3 +57,5 @@ wallets.belongsTo(user, { foreignKey: 'user_id' });
 
 user.hasMany(transactions, { foreignKey: 'user_id' });
 transactions.belongsTo(user, { foreignKey: 'user_id' });
+
+export default user;

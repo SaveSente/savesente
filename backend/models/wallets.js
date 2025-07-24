@@ -47,6 +47,9 @@ const wallets = sequelize.define('wallets', {
   },
 }, {
   modelName: 'wallets',
+  tableName: 'wallets',
+  timestamps: true,
+  freezeTableName: true,
 });
 
 wallets.hasMany(transactions, { foreignKey: 'wallet_id' });

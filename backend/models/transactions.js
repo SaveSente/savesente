@@ -57,6 +57,9 @@ const transactions = sequelize.define('transactions', {
   },
 }, {
   modelName: 'transactions',
+  tableName: 'transactions',
+  timestamps: true,
+  freezeTableName: true,
 });
 
 export default transactions;

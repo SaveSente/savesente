@@ -1,4 +1,7 @@
-{
+import 'dotenv/config'
+
+
+const config =   {
   "development": {
     "username": "postgres",
     "password": "password1",
@@ -11,13 +14,15 @@
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   }
 }
+export default config
+
