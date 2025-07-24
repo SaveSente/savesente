@@ -124,6 +124,8 @@ app.*.symbols
 
 node_modules/
 
+backend/.env
+
 
 
 
