@@ -130,19 +130,19 @@ export const withdraw = async (req, res) => {
     try {
 
        const createQuote = await bitnobApi.post('payouts/quotes', {
-        source: 'onchain',
+        source: 'offchain',
         fromAsset: 'usdt',
-        toCurrency: 'ngn',
+        toCurrency: 'ugx',
         amount: amount,
-        chain:'lightning',
       });
 
       const initializeQuote = await bitnobApi.post('payouts/initialize', {
         quoteId: createQuote.data.data.quoteId,
         customerId: foundUser.bitnob_customer_id,
-        country: 'NG',
+        country: 'UG',
         reference:'withdrawal-' + createQuote.data.data.quoteId,
         paymentReason: 'Withdrawal from wallet',
+        bwnw
       });
 
       const finalizeQuote = await bitnobApi.post('payouts/finalize', {
