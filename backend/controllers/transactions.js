@@ -47,6 +47,12 @@ export const deposit = async (req, res) => {
         amount: amount
       });
 
+      const total_amount = wallet.total_amount + parseFloat(amount);
+      await wallet.update({
+        total_amount,
+        balance: total_amount,
+      });
+
       await transaction.update({
         bitnob_transaction_id: paymentRequest.data.data.id,
         status: 'completed',

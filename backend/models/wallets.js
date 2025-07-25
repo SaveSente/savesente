@@ -30,8 +30,19 @@ const wallets = sequelize.define('wallets', {
     allowNull: true,
   },
   withdrawal_date: {
-    type: DataTypes.DATE,
-    allowNull: true
+  type: DataTypes.DATEONLY,
+  allowNull: true,
+  set(value) {
+    if (value === '' || value === null || value === undefined) {
+      this.setDataValue('withdrawal_date', null);
+    } else {
+      this.setDataValue('withdrawal_date', value);
+    }
+  }
+},
+  total_amount: {
+    type: DataTypes.DECIMAL(18, 8),
+    defaultValue: 0.0,
   },
   balance: {
     type: DataTypes.DECIMAL(18, 8),
