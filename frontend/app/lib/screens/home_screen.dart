@@ -776,9 +776,6 @@
 
 
 
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -786,7 +783,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/bottom_nav_widget.dart'; 
 import '../widgets/deposit_widget.dart'; 
 import '../widgets/withdraw_widget.dart'; 
-import '../screens/wallet_screen.dart';
+import '../widgets/header_widget.dart'; 
+import '../widgets/transactions_widget.dart'; 
+import 'wallet_actions_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -798,51 +797,8 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with profile
-            Container(
-              // CHANGED: SHIFTED HEADER PADDING MORE TO THE RIGHT
-              padding: EdgeInsets.only(left: 40, right: 20, top: 20, bottom: 20),
-              color: Colors.white,
-              child: Row(
-                children: [
-                 
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.grey[300]!,
-                        width: 2,
-                      ),
-                    ),
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: AssetImage('assets/profile.jpg'),
-                      backgroundColor: Colors.white,
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hello,',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'HANIFA MEY',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // Header with profile - Now using HeaderWidget
+            HeaderWidget(),
             
             // Main content
             Expanded(
@@ -895,7 +851,7 @@ class Home extends StatelessWidget {
                                 'Deposit to\nwallet',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: Colors.black,
                                 ),
                               ),
@@ -936,7 +892,7 @@ class Home extends StatelessWidget {
                                 'Withdraw\nfrom\nwallet',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: Colors.black,
                                 ),
                               ),
@@ -1020,7 +976,7 @@ class Home extends StatelessWidget {
                                                 'USDT',
                                                 style: GoogleFonts.barlow(
                                                   color: Colors.white,
-                                                  fontSize: 32, // SMALLER SIZE FOR CURRENCY
+                                                  fontSize: 32, 
                                                   
                                                 ),
                                               ),
@@ -1029,30 +985,28 @@ class Home extends StatelessWidget {
                                           Spacer(),
                                           Row(
                                             children: [
-                                              Text(
-                                                'Save Sente',
-                                                style: GoogleFonts.barlow(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              SizedBox(width: 10),
+                                           
+                                              SizedBox(width: 50),
                                              
                                               // ignore: sized_box_for_whitespace
                                               Container(
-                                                width: 20,
-                                                height: 20,
+                                                width: 30,
+                                                height: 30,
                                                 child: SvgPicture.asset(
-                                                  'assets/icon_white.svg',
+                                                  'assets/icon_whiter.svg',
                                                   colorFilter: ColorFilter.mode(
                                                     Colors.white, 
                                                     BlendMode.srcIn
                                                   ),
-                                                  placeholderBuilder: (context) => Icon(
-                                                    Icons.account_balance_wallet,
-                                                    color: Colors.white,
-                                                    size: 20,
-                                                  ),
+                                                  
+                                                ),
+                                              ),
+ SizedBox(width: 10),
+                                                 Text(
+                                                'Save Sente',
+                                                style: GoogleFonts.inter(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
                                                 ),
                                               ),
                                             ],
@@ -1070,40 +1024,8 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   
-                  // Recent Transactions - touches both sides and extends to bottom nav
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      // CHANGED: ADDED PADDING FOR TOP, LEFT, RIGHT
-                      padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Recent Transactions',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          
-                          // Transaction items
-                          _buildTransactionItem('- 100,000 ugx', 'savings wallet'),
-                          _buildTransactionItem('+ 500,000 ugx', 'savings wallet'),
-                          _buildTransactionItem('+ 700,000 ugx', 'savings wallet'),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Recent Transactions - Now using TransactionsWidget
+                  TransactionsWidget(),
                 ],
               ),
             ),
@@ -1112,33 +1034,6 @@ class Home extends StatelessWidget {
             Nav(),
           ],
         ),
-      ),
-    );
-  }
-  
-  Widget _buildTransactionItem(String amount, String type) {
-    bool isPositive = amount.startsWith('+');
-    return Padding(
-      padding: EdgeInsets.only(bottom: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            amount,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: isPositive ? Colors.green : Colors.red,
-            ),
-          ),
-          Text(
-            type,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
-        ],
       ),
     );
   }
