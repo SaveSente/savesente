@@ -81,7 +81,7 @@ export const deposit = async (req, res) => {
 
 export const withdraw = async (req, res) => {
   try {
-    const { wallet_id, amount, mobile_money_provider, phone_number, customer_id } = req.body;
+    const { wallet_id, amount, mobile_money_provider, phone_number, customer_id, account_name } = req.body;
 
     if (!wallet_id || !amount || !mobile_money_provider || !phone_number) {
       return res.status(400).json({ 
@@ -142,7 +142,12 @@ export const withdraw = async (req, res) => {
         country: 'UG',
         reference:'withdrawal-' + createQuote.data.data.quoteId,
         paymentReason: 'Withdrawal from wallet',
-        bwnw
+        beneficiary: {
+        type: "MOBILEMONEY",
+        accountName: account_name,
+        network: "AIRTEL",
+        accountNumber: `256${phone_number}`,
+      }
       });
 
       const finalizeQuote = await bitnobApi.post('payouts/finalize', {
